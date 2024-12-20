@@ -2,19 +2,22 @@
     <div class="w-full bg-transparent overflow-hidden h-screen">
         <navBar/>
         <ul class="w-min h-full flex flex-col gap-4 m-auto mt-3 overflow-hidden overflow-y-auto"  >
-            <li v-for="(item, idx) in ListExercices" :key="idx" class="w-full h-20 bg-white rounded-xl flex items-center gap-10 p-4 justify-between "   >
-               <div>
-                   <h3 class="text-lg font-bold capitalize">{{ item.name }}</h3>
-                   <span class="text-sm bg-slate-300/30 px-2 rounded-2xl font-semibold">
-                    <v-icon name="gi-muscle-up" />
-                    {{ item.muscle }}</span>
-                   <span class="text-sm bg-slate-300/30 px-2 rounded-2xl font-semibold ml-3">Type: {{ item.type }}</span>
-               </div>
-               <div>
-                <span class="text-sm font-bold text-white px-2 py-1 rounded-full" :style="{'backgroundColor': getColor(item.difficulty)}"
-                >{{ item.difficulty }}</span>
-               </div>
-            </li>
+            <router-link v-for="(item, idx) in ListExercices"  :to="{ name: 'SingleExercice', params: { name: item.name, type: item.type, instructions: item.instructions , equipment: item.equipment, muscle: item.muscle, level: item.difficulty  }}" class="w-full">
+
+                <li class="w-full h-20 bg-white rounded-xl flex items-center gap-10 p-4 justify-between "   >
+                    <div>
+                        <h3 class="text-lg font-bold capitalize">{{ item.name }}</h3>
+                        <span class="text-sm bg-slate-300/30 px-2 rounded-2xl font-semibold">
+                            <v-icon name="gi-muscle-up" />
+                            {{ item.muscle }}</span>
+                            <span class="text-sm bg-slate-300/30 px-2 rounded-2xl font-semibold ml-3">Type: {{ item.type }}</span>
+                        </div>
+                        <div>
+                            <span class="text-sm font-bold text-white px-2 py-1 rounded-full" :style="{'backgroundColor': getColor(item.difficulty)}"
+                            >{{ item.difficulty }}</span>
+                        </div>
+                    </li>
+                </router-link>
         </ul>
     </div>
 </template>
@@ -45,8 +48,8 @@ export default {
            async getListExcercices(muscle: string) {
                 try {
                     const response = await getMuscleExercices(muscle);
-                    console.log(response);
                     this.ListExercices = response
+                    console.log(this.ListExercices, '-> ListExercices');
                 } catch (error) {
                     console.error('Erreur lors de la récupération des exercices :', error);
                 }

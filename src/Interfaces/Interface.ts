@@ -1,6 +1,4 @@
-export  interface MuscleInterface {
-    name: string;
-}
+
 
 export  interface ExercieseInterface { 
     name: string;
@@ -8,6 +6,6 @@ export  interface ExercieseInterface {
     difficulty: string;
     muscle: string;
     equipment: string;
-    description: string;
+    instructions: string;
     
 }
