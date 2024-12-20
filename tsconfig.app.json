@@ -1,0 +1,19 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": [
+    "env.d.ts",  // Inclut les définitions d'environnement
+    "src/**/*",   // Inclut tous les fichiers dans src
+    "src/**/*.vue"  // Inclut également les fichiers .vue dans src
+  ],
+  "exclude": [
+    "src/**/__tests__/*"  // Exclut les tests (si tu en as)
+  ],
+  "compilerOptions": {
+    "composite": true,  // Utilise la compilation incrémentielle (option utile pour les grands projets)
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",  // Fichier de métadonnées de build
+    "paths": {
+      "@/*": ["./src/*"]  // Alias @ pour pointer vers le dossier src
+    },
+    "types": ["vite/client", "vue"]  // Inclut les types pour Vite et Vue
+  }
+}
